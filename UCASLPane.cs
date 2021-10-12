@@ -154,5 +154,41 @@ namespace SignLanguageAssistant
             slide.Shapes.AddMediaObject2(@"C:\temp\output.mp4", Left:with-530, Top:height-230, Width:300, Height:200);
             
         }
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+            config.SpeechSynthesisVoiceName = "en-US-BrandonNeural";
+            
+            using (var synthesizer = new SpeechSynthesizer(config))
+            {
+                
+                string text = "When most I wink, then do mine eyes best see,  For all the day they view things unrespected";
+
+                using (var result = synthesizer.SpeakTextAsync(text).Result)
+                {
+                    if (result.Reason == ResultReason.SynthesizingAudioCompleted)
+                    {
+                        Console.WriteLine($"Speech synthesized to speaker for text [{text}]");
+                    }
+                    else if (result.Reason == ResultReason.Canceled)
+                    {
+                        var cancellation = SpeechSynthesisCancellationDetails.FromResult(result);
+                        Console.WriteLine($"CANCELED: Reason={cancellation.Reason}");
+
+                        if (cancellation.Reason == CancellationReason.Error)
+                        {
+                            Console.WriteLine($"CANCELED: ErrorCode={cancellation.ErrorCode}");
+                            Console.WriteLine($"CANCELED: ErrorDetails=[{cancellation.ErrorDetails}]");
+                            Console.WriteLine($"CANCELED: Did you update the subscription info?");
+                        }
+                    }
+                }
+            }
+        }
 	}
 }

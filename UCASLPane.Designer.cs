@@ -30,17 +30,16 @@ namespace SignLanguageAssistant
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCASLPane));
-			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Slide1",
             "completed",
             "aaa"}, 0);
-			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "Slide2",
             "need notepage"}, -1);
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCASLPane));
 			this.btnVoiceRec = new System.Windows.Forms.CheckBox();
 			this.txtResult = new System.Windows.Forms.TextBox();
-			this.btnPlayTest = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.progressBar1 = new System.Windows.Forms.ProgressBar();
 			this.listView1 = new System.Windows.Forms.ListView();
@@ -48,6 +47,7 @@ namespace SignLanguageAssistant
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
 			this.button2 = new System.Windows.Forms.Button();
+			this.button3 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnVoiceRec
@@ -79,6 +79,7 @@ namespace SignLanguageAssistant
 			this.button1.TabIndex = 6;
 			this.button1.Text = "Process All";
 			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// progressBar1
 			// 
@@ -98,8 +99,8 @@ namespace SignLanguageAssistant
 			this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
 			this.listView1.HideSelection = false;
 			this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem1,
+            listViewItem2});
 			this.listView1.Location = new System.Drawing.Point(3, 48);
 			this.listView1.Name = "listView1";
 			this.listView1.Size = new System.Drawing.Size(221, 116);
@@ -134,15 +135,25 @@ namespace SignLanguageAssistant
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
+			// button3
+			// 
+			this.button3.Location = new System.Drawing.Point(24, 132);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(75, 23);
+			this.button3.TabIndex = 11;
+			this.button3.Text = "speak";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
 			// UCASLPane
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.listView1);
 			this.Controls.Add(this.progressBar1);
 			this.Controls.Add(this.button1);
-			this.Controls.Add(this.btnPlayTest);
 			this.Controls.Add(this.txtResult);
 			this.Controls.Add(this.btnVoiceRec);
 			this.Name = "UCASLPane";
@@ -155,7 +166,6 @@ namespace SignLanguageAssistant
 		#endregion
 		private System.Windows.Forms.CheckBox btnVoiceRec;
 		private System.Windows.Forms.TextBox txtResult;
-		private System.Windows.Forms.Button btnPlayTest;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.ProgressBar progressBar1;
 		private System.Windows.Forms.ListView listView1;
@@ -163,5 +173,6 @@ namespace SignLanguageAssistant
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ImageList imageList1;
 		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.Button button3;
 	}
 }
