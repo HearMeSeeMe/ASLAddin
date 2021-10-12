@@ -151,7 +151,7 @@ namespace SignLanguageAssistant
             var slide = presentation.Slides[slideRange.SlideNumber];
             var with = slide.Application.Width;
             var height = slide.Application.Height;
-            slide.Shapes.AddMediaObject2(@"C:\Project\ASL\ref\Speech-to-ASL\output.mp4", Left:with-530, Top:height-230, Width:300, Height:200);
+            slide.Shapes.AddMediaObject2(@"C:\temp\output.mp4", Left:with-530, Top:height-230, Width:300, Height:200);
             
         }
 	}
