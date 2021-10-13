@@ -25,8 +25,17 @@ namespace SignLanguageAssistant
 				return;
 			}
 
+			
 			//show taskpane
 			Globals.ThisAddIn.myCustomTaskPane.Visible = true;
+
+			Globals.ThisAddIn.myUCASLPane.Init();
+
+
+
+
+
+
 
 			PowerPoint.Application app = Globals.ThisAddIn.Application;
 			PowerPoint.SlideRange slideRange = app.ActiveWindow.Selection.SlideRange;

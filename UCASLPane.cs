@@ -22,6 +22,18 @@ namespace SignLanguageAssistant
 		public UCASLPane()
 		{
 			InitializeComponent();
+
+        }
+
+        public void Init()
+		{
+            lvSlide.Items.Clear();
+            for (var i = 1; i <= Globals.ThisAddIn.TotalSlideNumber; i++)
+            {
+                ListViewItem listViewItem = new ListViewItem { Text = $"Slide{i}" };
+                listViewItem.SubItems.Add(new ListViewItem.ListViewSubItem { Text = "-" });
+                lvSlide.Items.Add(listViewItem);
+            }
         }
 
      
@@ -151,14 +163,11 @@ namespace SignLanguageAssistant
             var slide = presentation.Slides[slideRange.SlideNumber];
             var with = slide.Application.Width;
             var height = slide.Application.Height;
-            slide.Shapes.AddMediaObject2(@"C:\Project\ASL\ref\Speech-to-ASL\output.mp4", Left:with-530, Top:height-230, Width:300, Height:200);
-            
+            //slide.Shapes.AddMediaObject2(@"C:\Project\ASL\ref\Speech-to-ASL\output.mp4", Left:with-530, Top:height-230, Width:300, Height:200);
+            slide.Shapes.AddMediaObject2(@"C:\Project\ASL\ref\Speech-to-ASL\output.mp4", LinkToFile: Microsoft.Office.Core.MsoTriState.msoCTrue, SaveWithDocument: Microsoft.Office.Core.MsoTriState.msoFalse, Left: 8.4F * 72, Top: 4.7F * 72, Width: 300, Height: 200);
+
         }
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-
-		}
 
 		private void button3_Click(object sender, EventArgs e)
 		{
@@ -190,5 +199,51 @@ namespace SignLanguageAssistant
                 }
             }
         }
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+            TextToSign tts = new TextToSign();
+            tts.ProcessText(0, "good news do work");
+            //tts.ProcessText("I had the best day of my life");
+
+
+        }
+
+		private void lvSlide_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btnProcessAll_Click(object sender, EventArgs e)
+		{
+            TextToSign tts = new TextToSign();
+
+            for(int i = 1; i<= Globals.ThisAddIn.TotalSlideNumber; i++)
+			{
+                PowerPoint.Application app = Globals.ThisAddIn.Application;                
+                var presentation = app.ActivePresentation;
+
+                var slide = presentation.Slides[i];
+
+                var note = slide.NotesPage.Shapes[2].TextFrame.TextRange.Text;
+
+                if (string.IsNullOrEmpty(note))
+				{
+                    lvSlide.Items[i - 1].SubItems[1].Text = "note empty";
+				}
+				else
+				{
+                    bool process_result = tts.ProcessText(i, note);
+
+					if (process_result)
+					{
+                        lvSlide.Items[i - 1].SubItems[1].Text = "completed";
+
+                    }
+                    //make
+				}
+
+            }
+		}
 	}
 }
