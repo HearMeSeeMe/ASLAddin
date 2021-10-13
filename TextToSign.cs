@@ -168,21 +168,30 @@ namespace SignLanguageAssistant
 
 				File.WriteAllText($"{TempFolder}\\vidlist.txt", strVidList);
 
+				//update ui
+				Globals.ThisAddIn.myUCASLPane.UpdateStatus(slideNo, "in progress");
+
 				//execute command
 				Process process = new Process();
 				ProcessStartInfo startInfo = new ProcessStartInfo();
 				startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 				startInfo.FileName = "cmd.exe";
-				//startInfo.Arguments = $"/C {TempFolder}\\ffmpeg.exe -f concat -safe 0 -i {TempFolder}\\vidlist.txt -c copy {TempFolder}\\output_{slideNo}.mp4 -y";
-				startInfo.Arguments = $"/C {TempFolder}\\ffmpeg.exe -f concat -i {TempFolder}\\vidlist.txt -c copy {TempFolder}\\output_{slideNo}.mp4 -y";
+				startInfo.Arguments = $"/C {TempFolder}\\ffmpeg.exe -f concat -safe 0 -i {TempFolder}\\vidlist.txt -c copy {TempFolder}\\output_{slideNo}.mp4 -y";
+				//startInfo.Arguments = $"/C {TempFolder}\\ffmpeg.exe -f concat -i {TempFolder}\\vidlist.txt -c copy {TempFolder}\\output_{slideNo}.mp4 -y";
 				process.StartInfo = startInfo;
 				process.Start();
+				
 				process.WaitForExit();
+
+				//update ui
+				Globals.ThisAddIn.myUCASLPane.UpdateStatus(slideNo, "completed");
 
 				return true;
 			}
 			catch (Exception ex)
 			{
+				//update ui
+				Globals.ThisAddIn.myUCASLPane.UpdateStatus(slideNo, "failed");
 				System.Windows.Forms.MessageBox.Show(ex.Message);
 			}
 
@@ -190,7 +199,6 @@ namespace SignLanguageAssistant
 		}
 
 		
-
 		private double Similar(string a, string b)
 		{
 			return DiceCoefficient(a, b);

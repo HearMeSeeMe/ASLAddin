@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,21 +37,43 @@ namespace SignLanguageAssistant
             }
         }
 
+        public bool CheckVideo
+		{
+			get { return chkVideo.Checked; }
+		}
+
+        public bool CheckAudio
+		{
+			get { return chkAudio.Checked; }
+		}
+
+        public bool SlideStatus(int slideNo)
+		{
+			if(lvSlide.Items.Count >= slideNo)
+			{
+                if(lvSlide.Items[slideNo-1].SubItems[1].Text == "completed")
+				{
+                    return true;
+				}
+			}
+            return false;
+		}
+
      
 
 
         private void btnVoiceRec_CheckedChanged(object sender, EventArgs e)
 		{
-			if (btnVoiceRec.Checked)
-			{
-                Task.Run(async () => await RecognitionWithMic());
-                //RecognitionWithMic().GetAwaiter().GetResult();
+			//if (btnVoiceRec.Checked)
+			//{
+   //             Task.Run(async () => await RecognitionWithMic());
+   //             //RecognitionWithMic().GetAwaiter().GetResult();
 
-            }
-			else
-			{
-                //Task.Run(async () => await  recognizer.StopContinuousRecognitionAsync().ConfigureAwait(false))
-			}
+   //         }
+			//else
+			//{
+   //             //Task.Run(async () => await  recognizer.StopContinuousRecognitionAsync().ConfigureAwait(false))
+			//}
 		}
 
 		private async Task RecognitionWithMic()
@@ -67,7 +90,7 @@ namespace SignLanguageAssistant
                 {
                     if (e.Result.Reason == ResultReason.RecognizingSpeech)
                     {
-                        txtResult.Invoke(new MethodInvoker(() => txtResult.Text += "\r\nRECOGNIZING: " + e.Result.Text + "\r\n"));
+                        //txtResult.Invoke(new MethodInvoker(() => txtResult.Text += "\r\nRECOGNIZING: " + e.Result.Text + "\r\n"));
                         
                         //txtResult.Invoke(new MethodInvoker(() =>
                         //{
@@ -88,14 +111,14 @@ namespace SignLanguageAssistant
                     if (e.Result.Reason == ResultReason.RecognizedSpeech)
                     {
 
-                        txtResult.Invoke(new MethodInvoker(() => txtResult.Text += "\r\nRECOGNIZED: " + e.Result.Text));
-                        txtResult.Invoke(new MethodInvoker(() => txtResult.Text += "\r\n-------------------- "));
-                        txtResult.Invoke(new MethodInvoker(() => txtResult.Text += "\n"));
-                        txtResult.Invoke(new MethodInvoker(() =>
-                        {
-                            txtResult.SelectionStart = txtResult.Text.Length;
-                            txtResult.ScrollToCaret();
-                        }));
+                        //txtResult.Invoke(new MethodInvoker(() => txtResult.Text += "\r\nRECOGNIZED: " + e.Result.Text));
+                        //txtResult.Invoke(new MethodInvoker(() => txtResult.Text += "\r\n-------------------- "));
+                        //txtResult.Invoke(new MethodInvoker(() => txtResult.Text += "\n"));
+                        //txtResult.Invoke(new MethodInvoker(() =>
+                        //{
+                        //    txtResult.SelectionStart = txtResult.Text.Length;
+                        //    txtResult.ScrollToCaret();
+                        //}));
 
                         //Console.WriteLine($"RECOGNIZED: Text={e.Result.Text}");
                         //// Retrieve the detected language
@@ -124,7 +147,7 @@ namespace SignLanguageAssistant
 
                 recognizer.SessionStarted += (s, e) =>
                 {
-                    txtResult.Invoke(new MethodInvoker(() => txtResult.Text = "\n    Session started event."));
+                    //txtResult.Invoke(new MethodInvoker(() => txtResult.Text = "\n    Session started event."));
 
                 
 
@@ -200,6 +223,46 @@ namespace SignLanguageAssistant
             }
         }
 
+        public void SpeakText(int slideNo)
+		{
+            if (!chkAudio.Checked) return;
+
+            Thread.Sleep(2000);
+
+            PowerPoint.Application app = Globals.ThisAddIn.Application;
+
+            var presentation = app.ActivePresentation;
+
+            var slide = presentation.Slides[slideNo];
+            var text = slide.NotesPage.Shapes[2].TextFrame.TextRange.Text;
+
+            config.SpeechSynthesisVoiceName = "en-US-BrandonNeural";
+
+            using (var synthesizer = new SpeechSynthesizer(config))
+            {
+
+                using (var result = synthesizer.SpeakTextAsync(text).Result)
+                {
+                    if (result.Reason == ResultReason.SynthesizingAudioCompleted)
+                    {
+                        //Console.WriteLine($"Speech synthesized to speaker for text [{text}]");
+                    }
+                    else if (result.Reason == ResultReason.Canceled)
+                    {
+                        var cancellation = SpeechSynthesisCancellationDetails.FromResult(result);
+                        //Console.WriteLine($"CANCELED: Reason={cancellation.Reason}");
+
+                        if (cancellation.Reason == CancellationReason.Error)
+                        {
+                            //Console.WriteLine($"CANCELED: ErrorCode={cancellation.ErrorCode}");
+                            //Console.WriteLine($"CANCELED: ErrorDetails=[{cancellation.ErrorDetails}]");
+                            //Console.WriteLine($"CANCELED: Did you update the subscription info?");
+                        }
+                    }
+                }
+            }
+        }
+
 		private void button4_Click(object sender, EventArgs e)
 		{
             TextToSign tts = new TextToSign();
@@ -211,8 +274,15 @@ namespace SignLanguageAssistant
 
 		private void lvSlide_SelectedIndexChanged(object sender, EventArgs e)
 		{
+            PowerPoint.Application app = Globals.ThisAddIn.Application;
 
-		}
+            var presentation = app.ActivePresentation;
+
+            if(lvSlide.SelectedItems.Count > 0)
+                presentation.Slides[lvSlide.SelectedItems[0].Index+1].Select();
+            
+            
+        }
 
 		private void btnProcessAll_Click(object sender, EventArgs e)
 		{
@@ -245,5 +315,53 @@ namespace SignLanguageAssistant
 
             }
 		}
+
+        public void UpdateStatus(int slideNo, string status)
+		{
+            lvSlide.Items[slideNo - 1].SubItems[1].Text = status;
+        }
+
+        public void UpdateListView()
+		{
+            if(Globals.ThisAddIn.TotalSlideNumber > lvSlide.Items.Count)
+			{
+                ListViewItem listViewItem = new ListViewItem { Text = $"Slide{Globals.ThisAddIn.TotalSlideNumber}" };
+                listViewItem.SubItems.Add(new ListViewItem.ListViewSubItem { Text = "-" });
+                lvSlide.Items.Add(listViewItem);
+            }
+
+            btnProcessAll_Click(null, null);
+		}
+
+		private void btnProcessCurrent_Click(object sender, EventArgs e)
+		{
+            TextToSign tts = new TextToSign();
+            PowerPoint.Application app = Globals.ThisAddIn.Application;
+            PowerPoint.SlideRange slideRange = app.ActiveWindow.Selection.SlideRange;
+
+            var presentation = app.ActivePresentation;
+
+
+            var slide = presentation.Slides[slideRange.SlideNumber];
+            
+
+            var note = slide.NotesPage.Shapes[2].TextFrame.TextRange.Text;
+
+            if (string.IsNullOrEmpty(note))
+            {
+                lvSlide.Items[slideRange.SlideNumber - 1].SubItems[1].Text = "note empty";
+            }
+            else
+            {
+                bool process_result = tts.ProcessText(slideRange.SlideNumber, note);
+
+                if (process_result)
+                {
+                    lvSlide.Items[slideRange.SlideNumber - 1].SubItems[1].Text = "completed";
+
+                }
+                //make
+            }
+        }
 	}
 }
