@@ -25,8 +25,15 @@ namespace SignLanguageAssistant
 				return;
 			}
 
+			
 			//show taskpane
 			Globals.ThisAddIn.myCustomTaskPane.Visible = true;
+
+			Globals.ThisAddIn.myUCASLPane.Init();
+
+			TextToSign tts = new TextToSign();
+
+
 
 			PowerPoint.Application app = Globals.ThisAddIn.Application;
 			PowerPoint.SlideRange slideRange = app.ActiveWindow.Selection.SlideRange;
@@ -70,17 +77,18 @@ namespace SignLanguageAssistant
 
 				foreach (var line in notes)
 				{
-					if (line.Contains(SECTION))
-					{
-						intSectionCnt++;
-						continue;
-					}
+					//ignore section
+					//if (line.Contains(SECTION))
+					//{
+					//	intSectionCnt++;
+					//	continue;
+					//}
 
-					if (intSectionCnt == 0 || intSectionCnt == 2) continue;
+					//if (intSectionCnt == 0 || intSectionCnt == 2) continue;
 
 					parsedNotes += line + "\r";
 				}
-				System.Windows.Forms.MessageBox.Show(parsedNotes);
+				//System.Windows.Forms.MessageBox.Show(parsedNotes);
 			}
 		}
 	}

@@ -30,84 +30,63 @@ namespace SignLanguageAssistant
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "Slide1",
             "completed",
             "aaa"}, 0);
-			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "Slide2",
             "need notepage"}, -1);
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCASLPane));
-			this.btnVoiceRec = new System.Windows.Forms.CheckBox();
-			this.txtResult = new System.Windows.Forms.TextBox();
-			this.button1 = new System.Windows.Forms.Button();
-			this.progressBar1 = new System.Windows.Forms.ProgressBar();
-			this.listView1 = new System.Windows.Forms.ListView();
+			this.btnProcessAll = new System.Windows.Forms.Button();
+			this.lvSlide = new System.Windows.Forms.ListView();
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
+			this.btnProcessCurrent = new System.Windows.Forms.Button();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.chkAudio = new System.Windows.Forms.CheckBox();
+			this.chkVideo = new System.Windows.Forms.CheckBox();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.groupBox1.SuspendLayout();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// btnVoiceRec
+			// btnProcessAll
 			// 
-			this.btnVoiceRec.Appearance = System.Windows.Forms.Appearance.Button;
-			this.btnVoiceRec.AutoSize = true;
-			this.btnVoiceRec.Location = new System.Drawing.Point(0, 225);
-			this.btnVoiceRec.Name = "btnVoiceRec";
-			this.btnVoiceRec.Size = new System.Drawing.Size(129, 22);
-			this.btnVoiceRec.TabIndex = 2;
-			this.btnVoiceRec.Text = "voice recognize test";
-			this.btnVoiceRec.UseVisualStyleBackColor = true;
-			this.btnVoiceRec.CheckedChanged += new System.EventHandler(this.btnVoiceRec_CheckedChanged);
+			this.btnProcessAll.AccessibleDescription = "";
+			this.btnProcessAll.Location = new System.Drawing.Point(7, 41);
+			this.btnProcessAll.Name = "btnProcessAll";
+			this.btnProcessAll.Size = new System.Drawing.Size(110, 25);
+			this.btnProcessAll.TabIndex = 6;
+			this.btnProcessAll.Text = "Process All";
+			this.btnProcessAll.UseVisualStyleBackColor = true;
+			this.btnProcessAll.Click += new System.EventHandler(this.btnProcessAll_Click);
 			// 
-			// txtResult
+			// lvSlide
 			// 
-			this.txtResult.Location = new System.Drawing.Point(0, 253);
-			this.txtResult.Multiline = true;
-			this.txtResult.Name = "txtResult";
-			this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-			this.txtResult.Size = new System.Drawing.Size(197, 163);
-			this.txtResult.TabIndex = 3;
-			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(3, 3);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(128, 23);
-			this.button1.TabIndex = 6;
-			this.button1.Text = "Process All";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
-			// 
-			// progressBar1
-			// 
-			this.progressBar1.Location = new System.Drawing.Point(3, 32);
-			this.progressBar1.Name = "progressBar1";
-			this.progressBar1.Size = new System.Drawing.Size(189, 10);
-			this.progressBar1.TabIndex = 7;
-			this.progressBar1.Value = 30;
-			// 
-			// listView1
-			// 
-			this.listView1.BackColor = System.Drawing.SystemColors.Control;
-			this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.lvSlide.BackColor = System.Drawing.SystemColors.Control;
+			this.lvSlide.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.lvSlide.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
-			this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-			this.listView1.HideSelection = false;
-			this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
-			this.listView1.Location = new System.Drawing.Point(3, 48);
-			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(221, 116);
-			this.listView1.SmallImageList = this.imageList1;
-			this.listView1.TabIndex = 9;
-			this.listView1.UseCompatibleStateImageBehavior = false;
-			this.listView1.View = System.Windows.Forms.View.Details;
+			this.lvSlide.FullRowSelect = true;
+			this.lvSlide.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+			this.lvSlide.HideSelection = false;
+			this.lvSlide.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+			this.lvSlide.Location = new System.Drawing.Point(4, 72);
+			this.lvSlide.MultiSelect = false;
+			this.lvSlide.Name = "lvSlide";
+			this.lvSlide.Size = new System.Drawing.Size(189, 183);
+			this.lvSlide.SmallImageList = this.imageList1;
+			this.lvSlide.TabIndex = 9;
+			this.lvSlide.UseCompatibleStateImageBehavior = false;
+			this.lvSlide.View = System.Windows.Forms.View.Details;
+			this.lvSlide.SelectedIndexChanged += new System.EventHandler(this.lvSlide_SelectedIndexChanged);
 			// 
 			// columnHeader1
 			// 
@@ -125,54 +104,111 @@ namespace SignLanguageAssistant
 			this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
 			this.imageList1.Images.SetKeyName(0, "icons8-check-64.png");
 			// 
-			// button2
+			// btnProcessCurrent
 			// 
-			this.button2.Location = new System.Drawing.Point(135, 225);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 10;
-			this.button2.Text = "video test";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.button2_Click);
+			this.btnProcessCurrent.Location = new System.Drawing.Point(7, 10);
+			this.btnProcessCurrent.Name = "btnProcessCurrent";
+			this.btnProcessCurrent.Size = new System.Drawing.Size(134, 25);
+			this.btnProcessCurrent.TabIndex = 13;
+			this.btnProcessCurrent.Text = "Process Current Slide";
+			this.btnProcessCurrent.UseVisualStyleBackColor = true;
+			this.btnProcessCurrent.Click += new System.EventHandler(this.btnProcessCurrent_Click);
 			// 
-			// button3
+			// groupBox1
 			// 
-			this.button3.Location = new System.Drawing.Point(24, 132);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(75, 23);
-			this.button3.TabIndex = 11;
-			this.button3.Text = "speak";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
+			this.groupBox1.Controls.Add(this.chkAudio);
+			this.groupBox1.Controls.Add(this.chkVideo);
+			this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.groupBox1.Location = new System.Drawing.Point(0, 579);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(211, 96);
+			this.groupBox1.TabIndex = 15;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Automatic Play";
+			// 
+			// chkAudio
+			// 
+			this.chkAudio.AutoSize = true;
+			this.chkAudio.Checked = true;
+			this.chkAudio.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkAudio.Location = new System.Drawing.Point(7, 58);
+			this.chkAudio.Name = "chkAudio";
+			this.chkAudio.Size = new System.Drawing.Size(53, 17);
+			this.chkAudio.TabIndex = 1;
+			this.chkAudio.Text = "Audio";
+			this.chkAudio.UseVisualStyleBackColor = true;
+			// 
+			// chkVideo
+			// 
+			this.chkVideo.AutoSize = true;
+			this.chkVideo.Checked = true;
+			this.chkVideo.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.chkVideo.Location = new System.Drawing.Point(7, 31);
+			this.chkVideo.Name = "chkVideo";
+			this.chkVideo.Size = new System.Drawing.Size(53, 17);
+			this.chkVideo.TabIndex = 0;
+			this.chkVideo.Text = "Video";
+			this.chkVideo.UseVisualStyleBackColor = true;
+			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.label2);
+			this.panel1.Controls.Add(this.label1);
+			this.panel1.Location = new System.Drawing.Point(0, 10);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(208, 294);
+			this.panel1.TabIndex = 17;
+			this.panel1.Visible = false;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(3, 28);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(181, 13);
+			this.label1.TabIndex = 18;
+			this.label1.Text = "Downloading resources for first use...";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(4, 62);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(122, 13);
+			this.label2.TabIndex = 19;
+			this.label2.Text = "Please wait 10 seconds.";
 			// 
 			// UCASLPane
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.button3);
-			this.Controls.Add(this.button2);
-			this.Controls.Add(this.listView1);
-			this.Controls.Add(this.progressBar1);
-			this.Controls.Add(this.button1);
-			this.Controls.Add(this.txtResult);
-			this.Controls.Add(this.btnVoiceRec);
+			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.groupBox1);
+			this.Controls.Add(this.btnProcessCurrent);
+			this.Controls.Add(this.lvSlide);
+			this.Controls.Add(this.btnProcessAll);
 			this.Name = "UCASLPane";
-			this.Size = new System.Drawing.Size(246, 623);
+			this.Size = new System.Drawing.Size(211, 675);
+			this.groupBox1.ResumeLayout(false);
+			this.groupBox1.PerformLayout();
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
-		private System.Windows.Forms.CheckBox btnVoiceRec;
-		private System.Windows.Forms.TextBox txtResult;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.ProgressBar progressBar1;
-		private System.Windows.Forms.ListView listView1;
+		private System.Windows.Forms.Button btnProcessAll;
+		private System.Windows.Forms.ListView lvSlide;
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ImageList imageList1;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button btnProcessCurrent;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.CheckBox chkAudio;
+		private System.Windows.Forms.CheckBox chkVideo;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label2;
 	}
 }
