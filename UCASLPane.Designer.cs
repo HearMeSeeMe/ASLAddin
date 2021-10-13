@@ -30,11 +30,11 @@ namespace SignLanguageAssistant
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "Slide1",
             "completed",
             "aaa"}, 0);
-			System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "Slide2",
             "need notepage"}, -1);
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCASLPane));
@@ -47,7 +47,11 @@ namespace SignLanguageAssistant
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.chkAudio = new System.Windows.Forms.CheckBox();
 			this.chkVideo = new System.Windows.Forms.CheckBox();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// btnProcessAll
@@ -72,8 +76,8 @@ namespace SignLanguageAssistant
 			this.lvSlide.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
 			this.lvSlide.HideSelection = false;
 			this.lvSlide.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem3,
+            listViewItem4});
 			this.lvSlide.Location = new System.Drawing.Point(4, 72);
 			this.lvSlide.MultiSelect = false;
 			this.lvSlide.Name = "lvSlide";
@@ -146,10 +150,39 @@ namespace SignLanguageAssistant
 			this.chkVideo.Text = "Video";
 			this.chkVideo.UseVisualStyleBackColor = true;
 			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.label2);
+			this.panel1.Controls.Add(this.label1);
+			this.panel1.Location = new System.Drawing.Point(0, 10);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(208, 294);
+			this.panel1.TabIndex = 17;
+			this.panel1.Visible = false;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(3, 28);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(181, 13);
+			this.label1.TabIndex = 18;
+			this.label1.Text = "Downloading resources for first use...";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(4, 62);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(122, 13);
+			this.label2.TabIndex = 19;
+			this.label2.Text = "Please wait 10 seconds.";
+			// 
 			// UCASLPane
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.btnProcessCurrent);
 			this.Controls.Add(this.lvSlide);
@@ -158,6 +191,8 @@ namespace SignLanguageAssistant
 			this.Size = new System.Drawing.Size(211, 675);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -172,5 +207,8 @@ namespace SignLanguageAssistant
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.CheckBox chkAudio;
 		private System.Windows.Forms.CheckBox chkVideo;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label2;
 	}
 }

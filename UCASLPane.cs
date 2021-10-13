@@ -76,6 +76,16 @@ namespace SignLanguageAssistant
 			//}
 		}
 
+        public void ShowPanel()
+		{
+            panel1.Invoke(new MethodInvoker(() => panel1.Visible = true));
+		}
+
+        public void HidePanel()
+		{
+            panel1.Invoke(new MethodInvoker(() => panel1.Visible = false));
+        }
+
 		private async Task RecognitionWithMic()
 		{
             var stopRecognition = new TaskCompletionSource<int>();
@@ -227,7 +237,7 @@ namespace SignLanguageAssistant
 		{
             if (!chkAudio.Checked) return;
 
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
 
             PowerPoint.Application app = Globals.ThisAddIn.Application;
 

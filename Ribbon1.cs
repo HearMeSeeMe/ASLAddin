@@ -31,6 +31,8 @@ namespace SignLanguageAssistant
 
 			Globals.ThisAddIn.myUCASLPane.Init();
 
+			TextToSign tts = new TextToSign();
+
 
 
 			PowerPoint.Application app = Globals.ThisAddIn.Application;

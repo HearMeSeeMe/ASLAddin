@@ -18,12 +18,103 @@ namespace SignLanguageAssistant
 	{
 
 
-		string[] useless_words = {"is", "the", "are", "am", "a", "it", "was", "were", "an", ",", ".", "?"};
+		string[] useless_words = { "is", "the", "are", "am", "a", "it", "was", "were", "an", ",", ".", "?" };
 
 		//sample signs
-		string[] sample_signs = {"bad", "do", "good", "hello", "hey", "hi", "how", "i", "it", "me", "my", "new", "phrase", "project", "speech", "sorry", "test", "This", "word", "work","you" };
+		string[] sample_signs = {
+			"able",
+			"and",
+			"another",
+			"apply",
+			"as",
+			"ask",
+			"attributes",
+			"bad",
+			"better",
+			"break",
+			"call",
+			"carefully",
+			"company",
+			"cultural",
+			"culture",
+			"customers",
+			"diverse",
+			"do",
+			"equal",
+			"equitable",
+			"equity",
+			"everybody",
+			"everyone",
+			"fair",
+			"from",
+			"good",
+			"growth",
+			"hear",
+			"hello",
+			"hey",
+			"hi",
+			"how",
+			"i",
+			"in",
+			"include",
+			"inclusive",
+			"it",
+			"journey",
+			"justice",
+			"listen",
+			"make",
+			"me",
+			"microsoft",
+			"mindset",
+			"morning",
+			"my",
+			"needs",
+			"new",
+			"one",
+			"our",
+			"out",
+			"perspective",
+			"phrase",
+			"products",
+			"project",
+			"see",
+			"seeking",
+			"session",
+			"shall",
+			"share",
+			"silos",
+			"so",
+			"sorry",
+			"speech",
+			"support",
+			"supporting",
+			"team",
+			"technology",
+			"test",
+			"that",
+			"their",
+			"them",
+			"these",
+			"they",
+			"This",
+			"tie",
+			"to",
+			"today",
+			"together",
+			"understand",
+			"us",
+			"we",
+			"what",
+			"when",
+			"will",
+			"with",
+			"word",
+			"work",
+			"workplace",
+			"you"
+		};
 
-		const string GITHUB_BASEURL = "https://github.com/dotnetpower/repo/raw/main";
+		const string GITHUB_BASEURL = "https://github.com/HearMeSeeMe/DatasetProcessor/raw/main";
 
 		const double SIMILIARITY_RATIO = 0.7;
 
@@ -40,7 +131,7 @@ namespace SignLanguageAssistant
 				return basePath;
 			}
 		}
-		
+
 		//TODO: change to async
 		public TextToSign()
 		{
@@ -51,8 +142,11 @@ namespace SignLanguageAssistant
 
 			// https://github.com/AlexPoint/OpenNlp
 			//sentence splitter
-			if (!File.Exists(Path.Combine(TempFolder,"EnglishSD.nbin")))
+			if (!File.Exists(Path.Combine(TempFolder, "EnglishSD.nbin")))
 			{
+				Globals.ThisAddIn.myUCASLPane.ShowPanel();
+
+
 
 				using (var client = new WebClient())
 				{
@@ -93,20 +187,22 @@ namespace SignLanguageAssistant
 				});
 			}
 
-			
+			Globals.ThisAddIn.myUCASLPane.HidePanel();
+
+
 		}
 
-		private bool ServerCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) 
-		{ 
-			if (sslPolicyErrors == SslPolicyErrors.None) 
-			{ 
-				return true; 
-			} 
-			
-			return false; 
+		private bool ServerCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+		{
+			if (sslPolicyErrors == SslPolicyErrors.None)
+			{
+				return true;
+			}
+
+			return false;
 		}
 
-		
+
 
 		public bool ProcessText(int slideNo, string text)
 		{
@@ -144,7 +240,7 @@ namespace SignLanguageAssistant
 				}
 			});
 
-			if(found_words.Count > 0)
+			if (found_words.Count > 0)
 			{
 				return Merge_signs(slideNo, found_words);
 			}
@@ -180,7 +276,7 @@ namespace SignLanguageAssistant
 				//startInfo.Arguments = $"/C {TempFolder}\\ffmpeg.exe -f concat -i {TempFolder}\\vidlist.txt -c copy {TempFolder}\\output_{slideNo}.mp4 -y";
 				process.StartInfo = startInfo;
 				process.Start();
-				
+
 				process.WaitForExit();
 
 				//update ui
@@ -198,7 +294,7 @@ namespace SignLanguageAssistant
 			return result;
 		}
 
-		
+
 		private double Similar(string a, string b)
 		{
 			return DiceCoefficient(a, b);
@@ -213,12 +309,12 @@ namespace SignLanguageAssistant
 		{
 			double best_score = -1.0;
 			string best_vid_name = string.Empty;
-			
+
 			sample_signs.ToList().ForEach(x =>
 			{
 				var similarity = Similar(x.ToLower(), word.ToLower());
 
-				if(best_score < similarity)
+				if (best_score < similarity)
 				{
 					best_score = similarity;
 					best_vid_name = x;
@@ -233,7 +329,7 @@ namespace SignLanguageAssistant
 		// https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Dice%27s_coefficient
 		public static double DiceCoefficient(string strA, string strB)
 		{
-			
+
 			HashSet<string> setA = new HashSet<string>();
 			HashSet<string> setB = new HashSet<string>();
 
