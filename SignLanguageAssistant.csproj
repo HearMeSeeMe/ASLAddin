@@ -202,6 +202,7 @@
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
+    <None Include="SignLanguageAssistant_1_TemporaryKey.pfx" />
     <None Include="SignLanguageAssistant_TemporaryKey.pfx" />
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
@@ -244,10 +245,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>SignLanguageAssistant_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>SignLanguageAssistant_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>C0C4CC09714250D8E74610D6C7E97362539F6FAC</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>364AE2E3C939D7C4EE19AAE71E16CD56BDE9F085</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
