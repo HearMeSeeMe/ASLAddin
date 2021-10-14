@@ -22,7 +22,7 @@ namespace SignLanguageAssistant
 
 		//sample signs
 		string[] sample_signs = {
-			"Accessible",
+			"accessible",
 			"overcoming",			
 			"disabilities",
 			"diversity",
@@ -36,7 +36,7 @@ namespace SignLanguageAssistant
 			"needed",
 			"potential",
 			"such",
-			"Technologies",
+			"technologies",
 			"unlock",
 			"visual",
 			"able",
@@ -107,6 +107,7 @@ namespace SignLanguageAssistant
 			"supporting",
 			"team",
 			"technology",
+			"technologies",
 			"test",
 			"that",
 			"their",
@@ -199,7 +200,8 @@ namespace SignLanguageAssistant
 
 					using (var client = new WebClient())
 					{
-						client.DownloadFile(github_url, Path.Combine(TempFolder, file));
+						//client.DownloadFile(github_url, Path.Combine(TempFolder, file));
+						client.DownloadFileAsync(new Uri(github_url), Path.Combine(TempFolder, file));
 					}
 				});
 			}
