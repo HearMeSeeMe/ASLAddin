@@ -20,119 +20,121 @@ namespace SignLanguageAssistant
 
 		string[] useless_words = { "is", "the", "are", "am", "a", "it", "was", "were", "an", "as", ",", ".", "?", "\"", "by", "at", "unlock" };
 
-		//sample signs
-		string[] sample_signs = {
-			"accessible",
-			"overcoming",			
-			"disabilities",
-			"diversity",
-			"employee",
-			"full",
-			"hearing",
-			"help",
-			"employees",
-			"learning",
-			"mental",
-			"needed",
-			"potential",
-			"such",
-			"technologies",
-			"unlock",
-			"visual",
-			"able",
-			"and",
-			"another",
-			"apply",
-			"as",
-			"ask",
-			"attributes",
-			"bad",
-			"better",
-			"break",
-			"call",
-			"carefully",
-			"company",
-			"cultural",
-			"culture",
-			"customers",
-			"diverse",
-			"do",
-			"equal",
-			"equitable",
-			"equity",
-			"everybody",
-			"everyone",
-			"fair",
-			"from",
-			"good",
-			"growth",
-			"hear",
-			"hello",
-			"hey",
-			"hi",
-			"how",
-			"i",
-			"in",
-			"include",
-			"inclusive",
-			"it",
-			"journey",
-			"justice",
-			"listen",
-			"make",
-			"me",
-			"microsoft",
-			"mindset",
-			"morning",
-			"my",
-			"needs",
-			"new",
-			"one",
-			"our",
-			"out",
-			"perspective",
-			"phrase",
-			"products",
-			"project",
-			"see",
-			"seeking",
-			"session",
-			"shall",
-			"share",
-			"silos",
-			"so",
-			"sorry",
-			"speech",
-			"support",
-			"supporting",
-			"team",
-			"technology",
-			"technologies",
-			"test",
-			"that",
-			"their",
-			"them",
-			"these",
-			"they",
-			"This",
-			"tie",
-			"to",
-			"today",
-			"together",
-			"understand",
-			"us",
-			"we",
-			"what",
-			"when",
-			"will",
-			"with",
-			"word",
-			"work",
-			"workplace",
-			"you"
-		};
+        //string[] sample_signs = { };
 
-		const string GITHUB_BASEURL = "https://github.com/HearMeSeeMe/DatasetProcessor/raw/main";
+        //sample signs
+        string[] sample_signs = {
+            "accessible",
+            "overcoming",
+            "disabilities",
+            "diversity",
+            "employee",
+            "full",
+            "hearing",
+            "help",
+            "employees",
+            "learning",
+            "mental",
+            "needed",
+            "potential",
+            "such",
+            "technologies",
+            "unlock",
+            "visual",
+            "able",
+            "and",
+            "another",
+            "apply",
+            "as",
+            "ask",
+            "attributes",
+            "bad",
+            "better",
+            "break",
+            "call",
+            "carefully",
+            "company",
+            "cultural",
+            "culture",
+            "customers",
+            "diverse",
+            "do",
+            "equal",
+            "equitable",
+            "equity",
+            "everybody",
+            "everyone",
+            "fair",
+            "from",
+            "good",
+            "growth",
+            "hear",
+            "hello",
+            "hey",
+            "hi",
+            "how",
+            "i",
+            "in",
+            "include",
+            "inclusive",
+            "it",
+            "journey",
+            "justice",
+            "listen",
+            "make",
+            "me",
+            "microsoft",
+            "mindset",
+            "morning",
+            "my",
+            "needs",
+            "new",
+            "one",
+            "our",
+            "out",
+            "perspective",
+            "phrase",
+            "products",
+            "project",
+            "see",
+            "seeking",
+            "session",
+            "shall",
+            "share",
+            "silos",
+            "so",
+            "sorry",
+            "speech",
+            "support",
+            "supporting",
+            "team",
+            "technology",
+            "technologies",
+            "test",
+            "that",
+            "their",
+            "them",
+            "these",
+            "they",
+            "This",
+            "tie",
+            "to",
+            "today",
+            "together",
+            "understand",
+            "us",
+            "we",
+            "what",
+            "when",
+            "will",
+            "with",
+            "word",
+            "work",
+            "workplace",
+            "you"
+        };
+
+        const string GITHUB_BASEURL = "https://github.com/HearMeSeeMe/DatasetProcessor/raw/main";
 
 		const double SIMILIARITY_RATIO = 0.7;
 
@@ -191,6 +193,19 @@ namespace SignLanguageAssistant
 					}
 				}
 
+				//Sign glossary
+				//if (!File.Exists(Path.Combine(TempFolder, "signs_glossary.txt")))
+				//{
+
+					
+				//}
+
+				//using (var client = new WebClient())
+				//{
+				//	client.DownloadFile(GITHUB_BASEURL + "/signs_glossary.txt", Path.Combine(TempFolder, "signs_glossary.txt"));
+				//}
+				//sample_signs = System.IO.File.ReadAllLines(TempFolder + "\\signs_glossary.txt");
+
 				//download signs
 				Parallel.ForEach(sample_signs, (file) =>
 				{
@@ -200,9 +215,9 @@ namespace SignLanguageAssistant
 
 					using (var client = new WebClient())
 					{
-						//client.DownloadFile(github_url, Path.Combine(TempFolder, file));
-						client.DownloadFileAsync(new Uri(github_url), Path.Combine(TempFolder, file));
-					}
+                        client.DownloadFile(github_url, Path.Combine(TempFolder, file));
+                        //client.DownloadFileAsync(new Uri(github_url), Path.Combine(TempFolder, file));
+                    }
 				});
 			}
 
